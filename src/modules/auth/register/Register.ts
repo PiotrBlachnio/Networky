@@ -1,5 +1,5 @@
 import { Resolver, Query, Arg, Mutation } from 'type-graphql';
-import { prisma } from '../../../common/utils/prisma';
+import { prisma } from '../../../common/utils/Prisma';
 import { User } from '../../../models/User';
 import { RegisterInput } from './RegisterInput';
 

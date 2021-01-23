@@ -11,7 +11,10 @@
             "program": "${workspaceFolder}/dist/index.js",
             "outFiles": [
                 "${workspaceFolder}/dist/**/*.js"
-            ]
+            ],
+            "env": {
+                "APP_PORT": "5000"
+            }
         }
     ]
 }

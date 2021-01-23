@@ -1,5 +1,5 @@
 import { registerDecorator, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
-import { prisma } from '../common/utils/prisma';
+import { prisma } from '../common/utils/Prisma';
 
 export function IsUniqueEmail(validationOptions?: ValidationOptions) {
     return function(object: Object, propertyName: string) {
