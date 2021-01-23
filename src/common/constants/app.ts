@@ -1,7 +1,7 @@
 export namespace App {
     export enum MODE {
-        DEVELOPMENT = 'development',
-        TESTING = 'testing',
-        PRODUCTION = 'production'
+        DEV = 'development',
+        TEST = 'testing',
+        PROD = 'production'
     }
 }
