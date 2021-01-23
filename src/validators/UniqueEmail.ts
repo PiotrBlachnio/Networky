@@ -1,10 +1,22 @@
-import { ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import { registerDecorator, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 import { prisma } from '../common/utils/prisma';
 
+export function IsUniqueEmail(validationOptions?: ValidationOptions) {
+    return function(object: Object, propertyName: string) {
+        registerDecorator({
+            target: object.constructor,
+            propertyName: propertyName,
+            options: validationOptions,
+            constraints: [],
+            validator: IsUniqueEmailValidator
+        });
+    }
+}
+
 @ValidatorConstraint({ async: true })
-export class UniqueEmail implements ValidatorConstraintInterface {
-    public async validate(email: string): Promise<boolean> {
+class IsUniqueEmailValidator implements ValidatorConstraintInterface {
+    public async validate(email: string) {
         const user = await prisma.user.findUnique({ where: { email }});
-        return !!user;
+        return !user;
     }
 }
