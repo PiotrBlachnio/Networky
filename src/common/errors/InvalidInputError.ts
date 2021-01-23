@@ -1,3 +1,4 @@
+import { ValidationError } from 'apollo-server-express';
 import { Constants } from '../constants';
 import { BaseError } from './BaseError';
 
@@ -5,8 +6,10 @@ export class InvalidInputError extends BaseError {
     id = Constants.ERROR.INVALID_INPUT;
     message = '';
 
-    constructor(message: string) {
+    constructor(error: ValidationError) {
         super();
-        this.message = message;
+
+        const message = Object.values(error.extensions.exception.validationErrors[0].constraints)[0];
+        this.message = message as string;
     }
 }
