@@ -3,8 +3,6 @@ import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
 import { RegisterResolver } from './modules/user/Register';
-import { PrismaClient } from '@prisma/client';
-
 
 const start = async () => {
     const schema = await buildSchema({

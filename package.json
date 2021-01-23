@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start:dev": "ts-node-dev --respawn src/index.ts",
-    "start:db": "bash scripts/start-db.sh"
+    "start:db": "bash scripts/start-db.sh",
+    "start:db:admin": "npx prisma studio",
+    "update:prisma": "npx prisma introspect && npx prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^2.15.0",
@@ -14,10 +16,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.4.0",
-    "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^1.1.1",
-    "typeorm": "^0.2.30"
+    "type-graphql": "^1.1.1"
   },
   "devDependencies": {
     "@prisma/cli": "^2.15.0",
