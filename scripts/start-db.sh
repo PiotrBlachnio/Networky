@@ -13,6 +13,7 @@ echo "Removing old container [$CONTAINER] and starting new fresh instance of [$C
   -e POSTGRES_PASSWORD=password \
   -e POSTGRES_USER=root \
   -p 5432:5432  \
+  -v /database/postgres:/var/lib/postgresql/data \
   -d postgres:13-alpine \
 
 echo -e "${GREEN_COLOR}[$CONTAINER] has started successfully!${NO_COLOR}";
