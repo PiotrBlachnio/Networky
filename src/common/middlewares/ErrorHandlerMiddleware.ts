@@ -1,5 +1,7 @@
 import { ValidationError } from 'apollo-server-express';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import { BaseError } from '../errors/BaseError';
+import { InternalServerError } from '../errors/InternalServerError';
 import { InvalidInputError } from '../errors/InvalidInputError';
 
 export const ErrorHandlerMiddleware = (error: GraphQLError): GraphQLFormattedError => {
@@ -7,7 +9,9 @@ export const ErrorHandlerMiddleware = (error: GraphQLError): GraphQLFormattedErr
         return handleAsValidationError(error);
     }
 
-    return error.originalError;
+    if(error.originalError instanceof BaseError) return error.originalError;
+
+    return new InternalServerError;
 }
 
 const handleAsValidationError = (error: ValidationError): GraphQLFormattedError => {
