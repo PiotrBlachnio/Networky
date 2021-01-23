@@ -1,7 +1,13 @@
-import AppConfig from './app';
-import DatabaseConfig from './database';
+import { config } from 'dotenv';
+
+config();
 
 export const Config = {
-    APP: AppConfig,
-    DATABASE: DatabaseConfig
+    APP: {
+        MODE: process.env.APP_MODE!,
+        PORT: process.env.APP_PORT! || process.env.PORT!
+    },
+    DATABASE: {
+        URL: process.env.DATABASE_URL!
+    }
 } as const;
