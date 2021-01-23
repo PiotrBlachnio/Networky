@@ -1,13 +1,11 @@
-import { Field } from 'type-graphql';
+import { BaseError } from './BaseError';
 
-export class InvalidInputError {
-    @Field()
-    id: number = 0;
-
-    @Field()
-    message: string;
+export class InvalidInputError extends BaseError {
+    id = 0;
+    message = '';
 
     constructor(message: string) {
+        super();
         this.message = message;
     }
 }
