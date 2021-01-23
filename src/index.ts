@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
-import { RegisterResolver } from './modules/user/Register';
+import { RegisterResolver } from './modules/auth/register/Register';
 
 const start = async () => {
     const schema = await buildSchema({
