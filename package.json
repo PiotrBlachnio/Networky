@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
+    "build": "tsc",
     "start:dev": "ts-node-dev --respawn src/index.ts",
     "start:db": "bash scripts/start-db.sh",
     "start:db:admin": "npx prisma studio",
