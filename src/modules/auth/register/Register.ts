@@ -12,6 +12,7 @@ export class RegisterResolver {
 
     @Mutation(() => User)
     async register(@Arg('data') { email, password }: RegisterInput): Promise<User> {
+        throw new Error('YO!');
         const user = await prisma.user.create({ data: { email, password }});
         
         return user;
