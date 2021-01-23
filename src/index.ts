@@ -7,14 +7,15 @@ import { ErrorHandlerMiddleware } from './common/middlewares/ErrorHandlerMiddlew
 import { Config } from './common/config';
 import { config } from 'dotenv';
 import { ConfigValidator } from './common/utils/ConfigValidator';
+import { container } from './common/utils/DIContainer';
 
 config();
 
 const start = async () => {
     await ConfigValidator.validate(Config);
-    const schema = await buildSchema({ resolvers: [RegisterResolver] });
+    const schema = await buildSchema({ resolvers: [RegisterResolver], container: container });
 
-    const apolloServer = new ApolloServer({ schema, formatError: ErrorHandlerMiddleware });
+    const apolloServer = new ApolloServer({ schema: schema, formatError: ErrorHandlerMiddleware });
     const app = express();
 
     apolloServer.applyMiddleware({ app });
