@@ -1,4 +1,5 @@
 export enum Error {
     INTERNAL_SERVER_ERROR = 0,
-    INVALID_INPUT = 100
+    INVALID_INPUT = 100,
+    EMAIL_NOT_FOUND = 101
 }
