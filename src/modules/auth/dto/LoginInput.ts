@@ -6,9 +6,9 @@ export class LoginInput {
     @Field()
     @Length(5, 64, { message: 'Email should have between 5 and 64 characters' })
     @IsEmail({}, { message: 'Email should be valid' })
-    email: string;
+    public readonly email: string;
 
     @Field()
     @Length(5, 64, { message: 'Password should have between 5 and 64 characters' })
-    password: string;
+    public readonly password: string;
 }
