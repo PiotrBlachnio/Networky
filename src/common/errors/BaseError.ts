@@ -1,9 +1,9 @@
 import { Field } from 'type-graphql';
 
-export abstract class BaseError {
+export abstract class BaseError extends Error {
     @Field()
-    protected abstract readonly id: number;
+    public abstract readonly id: number;
 
     @Field()
-    protected abstract readonly message: string;
+    public abstract readonly message: string;
 }
