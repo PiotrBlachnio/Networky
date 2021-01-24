@@ -1,5 +1,5 @@
 export class User {
-    id: string;
-    email: string;
-    password: string;
+    public readonly id: string;
+    public readonly email: string;
+    public readonly password: string;
 }
