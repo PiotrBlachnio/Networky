@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { buildSchema } from 'type-graphql';
-import { RegisterResolver } from './modules/auth/register/Register';
+import { buildSchema } from 'type-graphql'
+import { config } from 'dotenv';;
 import { ErrorHandlerMiddleware } from './common/middlewares/ErrorHandlerMiddleware';
 import { Config } from './common/config';
-import { config } from 'dotenv';
+import { resolvers } from './modules';
 import { ConfigValidator } from './common/utils/ConfigValidator';
 import { container } from './common/utils/DIContainer';
 
@@ -13,7 +13,7 @@ config();
 
 const start = async () => {
     await ConfigValidator.validate(Config);
-    const schema = await buildSchema({ resolvers: [RegisterResolver], container: container });
+    const schema = await buildSchema({ resolvers, container });
 
     const apolloServer = new ApolloServer({ schema: schema, formatError: ErrorHandlerMiddleware });
     const app = express();

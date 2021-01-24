@@ -1,18 +1,21 @@
+import { inject, injectable } from 'inversify';
 import { Resolver, Query, Arg, Mutation } from 'type-graphql';
-import { prisma } from '../../common/utils/Prisma';
-import { User } from '../../models/User';
+import { Constants } from '../../common/constants';
+import { AuthService } from './AuthService';
 import { RegisterInput } from './register/RegisterInput';
 
+@injectable()
 @Resolver()
-export class RegisterResolver {
+export class AuthResolver {
+    constructor(@inject(Constants.DEPENDENCY.AUTH_SERVICE) private readonly _authService: AuthService) {}
+
     @Query(() => String)
     async hello() {
         return 'Hello';
     }
 
-    @Mutation(() => User)
-    async register(@Arg('data') { email, password }: RegisterInput): Promise<User> {
-        const user = await prisma.user.create({ data: { email, password }});
-        return user;
+    @Mutation(() => String, { nullable: true })
+    async register(@Arg('data') input: RegisterInput): Promise<void> {
+       await this._authService.register(input);
     }
 }
