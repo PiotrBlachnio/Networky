@@ -19,6 +19,9 @@ export class ConfigValidator {
                 MODE: string().valid(Constants.APP.MODE.DEV, Constants.APP.MODE.PROD, Constants.APP.MODE.TEST),
                 PORT: number().min(1).max(65353)
             },
+            AUTH: {
+                ACCESS_TOKEN_SECRET: string().required()
+            },
             DATABASE: {
                 URL: string().required()
             },

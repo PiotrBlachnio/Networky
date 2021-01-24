@@ -1,5 +1,5 @@
-import { AccessToken } from '../tokens/access-token';
-import { Token } from '../tokens/token';
+import { AccessToken } from '../tokens/AccessToken';
+import { Token } from '../tokens/Token';
 import { IAccessTokenPayload } from './IAccessTokenPayload';
 import { ITokenPayload } from './ITokenPayload';
 
