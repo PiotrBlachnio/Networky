@@ -8,6 +8,7 @@ import { compare } from 'bcrypt';
 import { LoginResponse } from './dto/LoginResponse';
 import { InvalidCredentialsError } from '../../common/errors/InvalidCredentialsError';
 import { AccessToken } from '../../services/token/tokens/AccessToken';
+import { DuplicateEmailError } from '../../common/errors/DuplicateEmailError';
 
 @injectable()
 export class AuthService {
@@ -17,6 +18,9 @@ export class AuthService {
     ) {}
 
     public async register(input: RegisterInput): Promise<void> {
+        const user = await this._userRepository.findUnique({ where: { email: input.email }});
+        if(user) throw new DuplicateEmailError();
+
         await this._userRepository.create({ data: input });
     }
 
