@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import { Resolver, Query, Arg, Mutation } from 'type-graphql';
 import { Constants } from '../../common/constants';
 import { AuthService } from './AuthService';
-import { RegisterInput } from './register/RegisterInput';
+import { RegisterInput } from './dto/RegisterInput';
 
 @injectable()
 @Resolver()

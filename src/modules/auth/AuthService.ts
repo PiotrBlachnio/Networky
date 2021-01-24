@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { Constants } from '../../common/constants';
 import { prisma } from '../../common/utils/Prisma';
-import { RegisterInput } from './register/RegisterInput';
+import { RegisterInput } from './dto/RegisterInput';
 
 @injectable()
 export class AuthService {
