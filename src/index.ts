@@ -13,7 +13,7 @@ config();
 
 const start = async () => {
     await ConfigValidator.validate(Config);
-    const schema = await buildSchema({ resolvers, container });
+    const schema = await buildSchema({ resolvers, container, authChecker: () });
 
     const apolloServer = new ApolloServer({ schema: schema, formatError: ErrorHandlerMiddleware });
     const app = express();
