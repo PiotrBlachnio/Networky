@@ -9,9 +9,11 @@ export const ErrorHandlerMiddleware = (error: GraphQLError): GraphQLFormattedErr
 
     if(error.message === 'Argument Validation Error') return new InvalidInputError(error);
 
-    if(error.name === 'ValidationError') return error;
+    // if(error.name === 'ValidationError') return error;
 
-    if(error.originalError instanceof BaseError) return error.originalError;
+    if(error.originalError instanceof BaseError) {
+        return { id: error.originalError.id, message: error.originalError.message } as GraphQLFormattedError;
+    }
 
     return new InternalServerError();
 }

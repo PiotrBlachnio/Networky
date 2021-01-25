@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { Resolver, Query, Arg, Mutation } from 'type-graphql';
+import { Resolver, Query, Arg, Mutation, Authorized } from 'type-graphql';
 import { Constants } from '../../common/constants';
 import { AuthService } from './AuthService';
 import { LoginInput } from './dto/LoginInput';
@@ -12,6 +12,7 @@ export class AuthResolver {
     constructor(@inject(Constants.DEPENDENCY.AUTH_SERVICE) private readonly _authService: AuthService) {}
 
     @Query(() => String)
+    @Authorized()
     public async hello() {
         return 'Hello';
     }
