@@ -1,14 +1,19 @@
-import { IsEmail, Length } from 'class-validator';
+import { Length, IsEnum } from 'class-validator';
 import { Field, InputType } from 'type-graphql';
+import { User } from '../../../common/constants/user';
+import { LoginInput } from './LoginInput';
 
 @InputType()
-export class RegisterInput {
+export class RegisterInput extends LoginInput {
     @Field()
-    @Length(5, 64, { message: 'Email should have between 5 and 64 characters' })
-    @IsEmail({}, { message: 'Email should be valid' })
-    public readonly email: string;
+    @Length(3, 32, { message: 'First name should have between 3 and 32 characters' })
+    public readonly firstName: string;
 
     @Field()
-    @Length(5, 64, { message: 'Password should have between 5 and 64 characters' })
-    public readonly password: string;
+    @Length(3, 32, { message: 'Last name should have between 3 and 32 characters' })
+    public readonly lastName: string;
+
+    @Field()
+    @IsEnum(User.Gender, { message: 'Gender should be valid' })
+    public readonly gender: User.Gender;
 }
