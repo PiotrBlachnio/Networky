@@ -18,7 +18,7 @@ const start = async () => {
     
     const schema = await buildSchema({ resolvers, container, authChecker: AuthMiddleware({
         tokenService: container.get(Constants.DEPENDENCY.TOKEN_SERVICE)
-    }) });
+    })});
 
     const server = new ApolloServer({ schema: schema, formatError: ErrorHandlerMiddleware, context: ({ req }) => {
         return { req };
