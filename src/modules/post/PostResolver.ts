@@ -8,7 +8,7 @@ import { PostService } from './PostService';
 
 @injectable()
 @Resolver()
-export class UserResolver {
+export class PostResolver {
     constructor(@inject(Constants.DEPENDENCY.POST_SERVICE) private readonly _postService: PostService) {}
 
     @Mutation(() => PostResponse)
