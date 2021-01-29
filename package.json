@@ -8,7 +8,8 @@
     "start:dev": "ts-node-dev --respawn src/index.ts",
     "start:db": "bash scripts/start-db.sh",
     "start:db:admin": "npx prisma studio",
-    "update:prisma": "npx prisma introspect && npx prisma generate"
+    "prisma:update": "npx prisma introspect && npx prisma generate",
+    "prisma:migrate:dev": "npx prisma migrate dev --preview-feature"
   },
   "dependencies": {
     "@prisma/client": "^2.15.0",
