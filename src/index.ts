@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import express from 'express';
+import queryComplexity, { fieldExtensionsEstimator, simpleEstimator } from 'graphql-query-complexity';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql'
 import { config } from 'dotenv';;
@@ -21,9 +22,15 @@ const start = async () => {
         userRepository: container.get(Constants.DEPENDENCY.USER_REPOSITORY)
     })});
 
-    const server = new ApolloServer({ schema: schema, formatError: ErrorHandlerMiddleware, context: ({ req }) => {
-        return { req };
-    }});
+    const server = new ApolloServer({ schema: schema, formatError: ErrorHandlerMiddleware, context: ({ req }) => ({ req }), validationRules: [
+        queryComplexity({
+            maximumComplexity: 24,
+            estimators: [
+                fieldExtensionsEstimator(),
+                simpleEstimator({ defaultComplexity: 1 })
+            ]
+        })
+    ]});
 
     const app = express();
 

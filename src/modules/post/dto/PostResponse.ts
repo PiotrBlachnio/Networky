@@ -1,13 +1,11 @@
-import { Post } from '@prisma/client';
-import { Field, ObjectType } from 'type-graphql';
+import { User } from '@prisma/client';
+import { Field, ID, ObjectType } from 'type-graphql';
+import { UserResponse } from '../../user/dto/UserResponse';
 
 @ObjectType()
-export class UserResponse {
-    @Field()
+export class PostResponse {
+    @Field(() => ID)
     public readonly id: string;
-
-    @Field()
-    public readonly user: UserResponse;
 
     @Field()
     public readonly content: string;
@@ -18,10 +16,6 @@ export class UserResponse {
     @Field()
     public readonly createdAt: Date;
 
-    public static from(post: Post, user: UserResponse): UserResponse {
-        return {
-            ...post,
-            user
-        }
-    }
+    @Field(() => UserResponse, { nullable: true })
+    public readonly user?: User | null;
 }

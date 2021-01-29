@@ -10,7 +10,7 @@ import { UserService } from './UserService';
 export class UserResolver {
     constructor(@inject(Constants.DEPENDENCY.USER_SERVICE) private readonly _userService: UserService) {}
 
-    @Query(() => UserResponse)
+    @Query(() => UserResponse, { complexity: 1 })
     @Authorized()
     public async me(@Ctx() context: Context) {
         return this._userService.me(context);

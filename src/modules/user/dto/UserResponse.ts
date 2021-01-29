@@ -1,6 +1,6 @@
-import { Post, User } from '@prisma/client';
-import { Field, ObjectType } from 'type-graphql';
-import { User as UserType } from '../../../common/constants/user';
+import { Field, ObjectType, Root } from 'type-graphql';
+import { User } from '../../../common/constants/user';
+import { PostResponse } from '../../post/dto/PostResponse';
 
 @ObjectType()
 export class UserResponse {
@@ -8,20 +8,19 @@ export class UserResponse {
     public readonly email: string;
 
     @Field()
-    public readonly name: string;
+    public readonly firstName: string;
 
     @Field()
-    public readonly gender: UserType.GENDER;
+    public readonly lastName: string;
 
     @Field()
-    public readonly posts: Post[];
+    public readonly gender: User.GENDER;
 
-    public static from(user: User, posts: Post[]): UserResponse {
-        return {
-            ...user,
-            name: user.firstName + ' ' + user.lastName,
-            gender: user.gender as UserType.GENDER,
-            posts: posts
-        }
+    @Field(() => [PostResponse], { nullable: true })
+    posts?: [PostResponse] | null
+
+    @Field()
+    public name(@Root() root: UserResponse): string {
+        return root.firstName + ' ' + root.lastName; 
     }
 }
