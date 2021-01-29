@@ -17,7 +17,7 @@ export class PostService {
     public async create(context: Context, input: CreatePostRequest): Promise<Post> {
         const post = await this._postRepository.create({ data: {
             content: input.content,
-            userId: context.req.user.id
+            userId: context.user.id
         }});
 
         return post;
@@ -27,9 +27,9 @@ export class PostService {
         const post = await this._postRepository.findUnique({ where: { id: input.postId }});
         if(!post) throw new PostNotFoundError();
 
-        const like = await this._likeRepository.findFirst({ where: { userId: context.req.user.id, postId: post.id }});
+        const like = await this._likeRepository.findFirst({ where: { userId: context.user.id, postId: post.id }});
 
         if(like) await this._likeRepository.delete({ where: { id: like.id }});
-        else await this._likeRepository.create({ data: { userId: context.req.user.id, postId: post.id }});
+        else await this._likeRepository.create({ data: { userId: context.user.id, postId: post.id }});
     }
 }

@@ -1,6 +1,6 @@
 import { Comment } from '@prisma/client';
 import { inject, injectable } from 'inversify';
-import { Context } from 'vm';
+import { Context } from '../../types/Context';
 import { Constants } from '../../common/constants';
 import { PostNotFoundError } from '../../common/errors/PostNotFoundError';
 import { prisma } from '../../common/utils/Prisma';
@@ -17,7 +17,7 @@ export class CommentService {
         const post = await this._postRepository.findUnique({ where: { id: input.postId }});
         if(!post) throw new PostNotFoundError();
         
-        const comment = await this._commentRepository.create({ data: { userId: context.req.user.id, postId: post.id, content: input.content }});
+        const comment = await this._commentRepository.create({ data: { userId: context.user.id, postId: post.id, content: input.content }});
         return comment;
     }
 }

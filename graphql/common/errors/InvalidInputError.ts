@@ -1,4 +1,4 @@
-import { ValidationError } from 'apollo-server-express';
+import { ValidationError } from 'apollo-server-azure-functions';
 import { Constants } from '../constants';
 import { BaseError } from './BaseError';
 
