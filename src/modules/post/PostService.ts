@@ -24,7 +24,7 @@ export class PostService {
     }
 
     public async like(context: Context, input: LikePostRequest): Promise<void> {
-        const post = await this._postRepository.findUnique({ where: { id: input.id }});
+        const post = await this._postRepository.findUnique({ where: { id: input.postId }});
         if(!post) throw new PostNotFoundError();
 
         const like = await this._likeRepository.findFirst({ where: { userId: context.req.user.id, postId: post.id }});

@@ -1,7 +1,10 @@
+import { Comment } from '@prisma/client';
 import { inject, injectable } from 'inversify';
 import { Context } from 'vm';
 import { Constants } from '../../common/constants';
+import { PostNotFoundError } from '../../common/errors/PostNotFoundError';
 import { prisma } from '../../common/utils/Prisma';
+import { CreateCommentRequest } from './dto/CreateCommentRequest';
 
 @injectable()
 export class CommentService {
@@ -10,5 +13,11 @@ export class CommentService {
         @inject(Constants.DEPENDENCY.POST_REPOSITORY) private readonly _postRepository: typeof prisma.post
     ) {}
 
-    public async create(context: Context, input: )
+    public async create(context: Context, input: CreateCommentRequest): Promise<Comment> {
+        const post = await this._postRepository.findUnique({ where: { id: input.postId }});
+        if(!post) throw new PostNotFoundError();
+        
+        const comment = await this._commentRepository.create({ data: { userId: context.req.user.id, postId: post.id, content: input.content }});
+        return comment;
+    }
 }
