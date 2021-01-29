@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import { Resolver, Query, Authorized, Ctx } from 'type-graphql';
 import { Constants } from '../../common/constants';
 import { Context } from '../../types/Context';
-import { MeResponse } from './dto/MeResponse';
+import { UserResponse } from './dto/UserResponse';
 import { UserService } from './UserService';
 
 @injectable()
@@ -10,7 +10,7 @@ import { UserService } from './UserService';
 export class UserResolver {
     constructor(@inject(Constants.DEPENDENCY.USER_SERVICE) private readonly _userService: UserService) {}
 
-    @Query(() => MeResponse)
+    @Query(() => UserResponse)
     @Authorized()
     public async me(@Ctx() context: Context) {
         return this._userService.me(context);

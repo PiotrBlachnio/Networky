@@ -1,9 +1,9 @@
-import { User } from '@prisma/client';
+import { Post, User } from '@prisma/client';
 import { Field, ObjectType } from 'type-graphql';
 import { User as UserType } from '../../../common/constants/user';
 
 @ObjectType()
-export class MeResponse {
+export class UserResponse {
     @Field()
     public readonly email: string;
 
@@ -13,11 +13,15 @@ export class MeResponse {
     @Field()
     public readonly gender: UserType.GENDER;
 
-    public static fromUser(user: User): MeResponse {
+    @Field()
+    public readonly posts: Post[];
+
+    public static from(user: User, posts: Post[]): UserResponse {
         return {
-            email: user.email,
+            ...user,
             name: user.firstName + ' ' + user.lastName,
-            gender: user.gender as UserType.GENDER
+            gender: user.gender as UserType.GENDER,
+            posts: posts
         }
     }
 }
