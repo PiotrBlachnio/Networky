@@ -17,9 +17,9 @@ export class CommentResponse {
     @Field()
     public readonly createdAt: Date;
 
-    @Field(() => UserResponse)
-    public readonly user?: User;
+    @Field(() => UserResponse, { nullable: true })
+    public readonly user?: User | null;
 
-    @Field(() => PostResponse)
-    public readonly post?: Post;
+    @Field(() => PostResponse, { nullable: true })
+    public readonly post?: Post | null;
 }

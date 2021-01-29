@@ -1,5 +1,6 @@
 import { Field, ObjectType, Root } from 'type-graphql';
 import { User } from '../../../common/constants/user';
+import { CommentResponse } from '../../comment/dto/CommentResponse';
 import { PostResponse } from '../../post/dto/PostResponse';
 
 @ObjectType()
@@ -17,7 +18,10 @@ export class UserResponse {
     public readonly gender: User.GENDER;
 
     @Field(() => [PostResponse], { nullable: true })
-    posts?: [PostResponse] | null
+    public readonly posts?: [PostResponse] | null;
+
+    @Field(() => [CommentResponse], { nullable: true })
+    public readonly comments?: [CommentResponse] | null;
 
     @Field()
     public name(@Root() root: UserResponse): string {

@@ -1,5 +1,6 @@
 import { User } from '@prisma/client';
 import { Field, ID, ObjectType } from 'type-graphql';
+import { CommentResponse } from '../../comment/dto/CommentResponse';
 import { UserResponse } from '../../user/dto/UserResponse';
 
 @ObjectType()
@@ -18,4 +19,7 @@ export class PostResponse {
 
     @Field(() => UserResponse, { nullable: true })
     public readonly user?: User | null;
+
+    @Field(() => [CommentResponse], { nullable: true })
+    public readonly comments?: [CommentResponse] | null;
 }
