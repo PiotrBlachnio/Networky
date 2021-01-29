@@ -14,6 +14,7 @@ const container = new Container();
 
 container.bind<typeof prisma.user>(Constants.DEPENDENCY.USER_REPOSITORY).toConstantValue(prisma.user);
 container.bind<typeof prisma.post>(Constants.DEPENDENCY.POST_REPOSITORY).toConstantValue(prisma.post);
+container.bind<typeof prisma.like>(Constants.DEPENDENCY.LIKE_REPOSITORY).toConstantValue(prisma.like);
 
 container.bind<AuthService>(Constants.DEPENDENCY.AUTH_SERVICE).to(AuthService);
 container.bind<AuthResolver>(AuthResolver).to(AuthResolver).inSingletonScope();

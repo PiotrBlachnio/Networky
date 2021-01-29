@@ -9,7 +9,10 @@ import { LikePostRequest } from './dto/LikePostRequest';
 
 @injectable()
 export class PostService {
-    constructor(@inject(Constants.DEPENDENCY.POST_REPOSITORY) private readonly _postRepository: typeof prisma.post) {}
+    constructor(
+        @inject(Constants.DEPENDENCY.POST_REPOSITORY) private readonly _postRepository: typeof prisma.post,
+        @inject(Constants.DEPENDENCY.LIKE_REPOSITORY) private readonly _likeRepository: typeof prisma.like
+    ) {}
 
     public async create(context: Context, input: CreatePostRequest): Promise<Post> {
         const post = await this._postRepository.create({ data: {
@@ -24,6 +27,9 @@ export class PostService {
         const post = await this._postRepository.findUnique({ where: { id: input.id }});
         if(!post) throw new PostNotFoundError();
 
-        // await this._
+        const like = await this._likeRepository.findFirst({ where: { userId: context.req.user.id, postId: post.id }});
+
+        if(like) await this._likeRepository.delete({ where: { id: like.id }});
+        else await this._likeRepository.create({ data: { userId: context.req.user.id, postId: post.id }});
     }
 }
