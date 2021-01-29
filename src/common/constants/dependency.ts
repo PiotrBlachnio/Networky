@@ -1,9 +1,6 @@
 export enum Dependency {
     AUTH_SERVICE = 'auth_service',
-    AUTH_RESOLVER = 'auth_resolver',
-
     USER_SERVICE = 'user_service',
-    USER_RESOLVER = 'user_resolver',
 
     USER_REPOSITORY = 'user_repository',
 
