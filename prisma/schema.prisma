@@ -23,7 +23,7 @@ model Post {
   user      User      @relation(fields: [userId], references: [id])
   userId    String
   content   String
-  likes     Int
+  likes     Int       @default(0)
   createdAt DateTime  @default(now())
   comments Comment[]
 }
@@ -35,6 +35,6 @@ model Comment {
   post      Comment   @relation(fields: [postId], references: [id])
   postId    String
   content   String
-  likes     Int
-  createdAt DateTime @default(now())
+  likes     Int       @default(0)
+  createdAt DateTime  @default(now())
 }
