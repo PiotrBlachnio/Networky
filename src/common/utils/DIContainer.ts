@@ -18,6 +18,7 @@ container.bind<AuthResolver>(AuthResolver).to(AuthResolver).inSingletonScope();
 container.bind<UserService>(Constants.DEPENDENCY.USER_SERVICE).to(UserService);
 container.bind<UserResolver>(UserResolver).to(UserResolver);
 
+container.bind
 container.bind<ITokenService>(Constants.DEPENDENCY.TOKEN_SERVICE).to(JwtTokenService);
 
 export { container };
