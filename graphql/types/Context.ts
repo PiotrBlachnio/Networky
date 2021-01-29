@@ -1,10 +1,7 @@
-import { Request as ExpressRequest } from 'express';
 import { IAccessTokenPayload } from '../services/token/interfaces/IAccessTokenPayload';
+import { Context as AzureContext } from '@azure/functions';
 
 export interface Context {
-    req: Request
-}
-
-interface Request extends ExpressRequest {
+    azureContext: AzureContext;
     user: IAccessTokenPayload;
 }

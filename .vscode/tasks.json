@@ -13,6 +13,25 @@
 				"isDefault": true
 			},
 			"label": "tsc: watch"
+		},
+		{
+			"type": "func",
+			"command": "host start",
+			"problemMatcher": "$func-node-watch",
+			"isBackground": true,
+			"dependsOn": "build"
+		},
+		{
+			"type": "shell",
+			"label": "build",
+			"command": "yarn build",
+			"dependsOn": "install",
+			"problemMatcher": "$tsc"
+		},
+		{
+			"type": "shell",
+			"label": "install",
+			"command": "yarn install"
 		}
 	]
 }
