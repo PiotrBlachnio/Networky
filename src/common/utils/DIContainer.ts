@@ -1,6 +1,8 @@
 import { Container } from 'inversify';
 import { AuthResolver } from '../../modules/auth/AuthResolver';
 import { AuthService } from '../../modules/auth/AuthService';
+import { CommentResolver } from '../../modules/comment/CommentResolver';
+import { CommentService } from '../../modules/comment/CommentService';
 import { PostResolver } from '../../modules/post/PostResolver';
 import { PostService } from '../../modules/post/PostService';
 import { UserResolver } from '../../modules/user/UserResolver';
@@ -25,6 +27,9 @@ container.bind<UserResolver>(UserResolver).to(UserResolver);
 
 container.bind<PostService>(Constants.DEPENDENCY.POST_SERVICE).to(PostService);
 container.bind<PostResolver>(PostResolver).to(PostResolver).inSingletonScope();
+
+container.bind<CommentService>(Constants.DEPENDENCY.COMMENT_SERVICE).to(CommentService);
+container.bind<CommentResolver>(CommentResolver).to(CommentResolver).inSingletonScope();
 
 container.bind<ITokenService>(Constants.DEPENDENCY.TOKEN_SERVICE).to(JwtTokenService);
 

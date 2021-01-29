@@ -9,7 +9,7 @@ export class UserService {
     constructor(@inject(Constants.DEPENDENCY.USER_REPOSITORY) private readonly _userRepository: typeof prisma.user) {}
 
     public async me(context: Context): Promise<User> {
-        const user = await this._userRepository.findUnique({ where: { id: context.req.user.id }, include: { posts: { include: { likes: true }}, comments: true }});
+        const user = await this._userRepository.findUnique({ where: { id: context.req.user.id }, include: { posts: { include: { likes: true, comments: true }}, comments: true }});
         return user;
     }
 }
