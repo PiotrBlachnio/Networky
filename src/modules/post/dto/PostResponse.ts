@@ -12,9 +12,6 @@ export class PostResponse {
     public readonly content: string;
 
     @Field()
-    public readonly likes: number;
-
-    @Field()
     public readonly createdAt: Date;
 
     @Field(() => UserResponse, { nullable: true })
@@ -22,4 +19,6 @@ export class PostResponse {
 
     @Field(() => [CommentResponse], { nullable: true })
     public readonly comments?: [CommentResponse] | null;
+
+    @
 }

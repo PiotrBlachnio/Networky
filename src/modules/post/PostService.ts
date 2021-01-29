@@ -1,9 +1,11 @@
 import { Post } from '@prisma/client';
 import { inject, injectable } from 'inversify';
 import { Constants } from '../../common/constants';
+import { PostNotFoundError } from '../../common/errors/PostNotFoundError';
 import { prisma } from '../../common/utils/Prisma';
 import { Context } from '../../types/Context';
 import { CreatePostRequest } from './dto/CreatePostRequest';
+import { LikePostRequest } from './dto/LikePostRequest';
 
 @injectable()
 export class PostService {
@@ -16,5 +18,12 @@ export class PostService {
         }});
 
         return post;
+    }
+
+    public async like(context: Context, input: LikePostRequest): Promise<void> {
+        const post = await this._postRepository.findUnique({ where: { id: input.id }});
+        if(!post) throw new PostNotFoundError();
+
+        // await this._
     }
 }
