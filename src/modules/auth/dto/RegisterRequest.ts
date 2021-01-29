@@ -1,10 +1,10 @@
 import { Length, IsEnum } from 'class-validator';
 import { Field, InputType } from 'type-graphql';
 import { User } from '../../../common/constants/user';
-import { LoginInput } from './LoginInput';
+import { LoginRequest } from './LoginRequest';
 
 @InputType()
-export class RegisterInput extends LoginInput {
+export class RegisterRequest extends LoginRequest {
     @Field()
     @Length(3, 32, { message: 'First name should have between 3 and 32 characters' })
     public readonly firstName: string;

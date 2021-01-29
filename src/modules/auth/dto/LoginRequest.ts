@@ -2,7 +2,7 @@ import { Length, IsEmail } from 'class-validator';
 import { Field, InputType } from 'type-graphql';
 
 @InputType()
-export class LoginInput {
+export class LoginRequest {
     @Field()
     @Length(5, 64, { message: 'Email should have between 5 and 64 characters' })
     @IsEmail({}, { message: 'Email should be valid' })
