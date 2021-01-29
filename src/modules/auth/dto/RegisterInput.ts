@@ -14,6 +14,6 @@ export class RegisterInput extends LoginInput {
     public readonly lastName: string;
 
     @Field()
-    @IsEnum(User.Gender, { message: 'Gender should be valid' })
-    public readonly gender: User.Gender;
+    @IsEnum(User.GENDER, { message: 'Gender should be valid' })
+    public readonly gender: User.GENDER;
 }

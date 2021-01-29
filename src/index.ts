@@ -17,7 +17,8 @@ const start = async () => {
     await ConfigValidator.validate(Config);
     
     const schema = await buildSchema({ resolvers, container, authChecker: AuthMiddleware({
-        tokenService: container.get(Constants.DEPENDENCY.TOKEN_SERVICE)
+        tokenService: container.get(Constants.DEPENDENCY.TOKEN_SERVICE),
+        userRepository: container.get(Constants.DEPENDENCY.USER_REPOSITORY)
     })});
 
     const server = new ApolloServer({ schema: schema, formatError: ErrorHandlerMiddleware, context: ({ req }) => {

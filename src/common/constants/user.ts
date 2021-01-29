@@ -1,5 +1,5 @@
 export namespace User {
-    export enum Gender {
+    export enum GENDER {
         MALE = 'male',
         FEMALE = 'female'
     }
