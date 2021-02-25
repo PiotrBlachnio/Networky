@@ -1,5 +1,5 @@
 # Networky
-Graphql API created using Node.js and Typescript. It's acts as a social network api interface and allows you to create posts, comments and leave likes. Database is handled by the Prisma and it's deployed as an Azure Function.
+Graphql API created using Node.js and Typescript. It acts as a social network api interface and allows you to create posts, comments and leave likes. Database is handled by the Prisma and it's deployed as an Azure Function.
 
 ## Technologies used
 * Node.js
